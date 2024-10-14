@@ -34,7 +34,7 @@ function cdh_add_fakes_reviews() {
 
 			$reviews_index = 0;
 			foreach ($products_to_review as $product) {
-				$numero_avaliacoes = rand(1, 5); // Add 1 to 5 reviews to each product
+				$numero_avaliacoes = rand(1, 3); // Add 1 to 3 reviews to each product
 
 				for ($i = 0; $i < $numero_avaliacoes; $i++) {
 					$customer_name = array_shift($customer_names); // Get the next author from the list
@@ -127,10 +127,15 @@ function cdh_get_fake_review_comment() {
  * @since 14/10/2024
  */
 function cdh_get_fake_review_date() {
-	$mes_passado = strtotime('-1 month', strtotime('27-10-2023'));
-	$data_avaliacao = date('Y-m-d H:i:s', mt_rand($mes_passado, strtotime('27-10-2023')));
+    // Define o timestamp atual
+    $data_atual = time();
+    // Calcula o timestamp de 6 meses atrás
+    $seis_meses_atras = strtotime('-6 months', $data_atual);
+    
+    // Gera uma data aleatória entre 6 meses atrás e agora
+    $data_avaliacao = date('Y-m-d H:i:s', mt_rand($seis_meses_atras, $data_atual));
 
-	return $data_avaliacao;
+    return $data_avaliacao;
 }
 
 /**
